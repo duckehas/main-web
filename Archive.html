@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archive Overview | Engine6.0</title>
+
+<link href="assets/css/imports.css" rel="stylesheet">
+<link href="assets/css/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/font.css" />
+<link rel="icon" type="image/x-icon" href="assets/img/icon.ico">
+
+<script src="assets/js/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="assets/js/aos@2.3.1/aos.js"></script>
+
+<style>
+body {
+    background: #2f2f2f; /* Gray page background */
+    color: white;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #1c1c1c; /* Dark gray header */
+    padding: 10px 30px;
+    display: flex;
+    justify-content: center; /* Center brand after nav removal */
+    align-items: center;
+}
+
+.brand h1 {
+    font-size: 36px;
+    margin: 0;
+    background: linear-gradient(to right, #0066d4, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+.panel {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #ffffff20;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.panel h2 {
+    margin-top: 0;
+    color: #ffffff;
+}
+
+.panel p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+/* Button styling like Engine6.0 main page */
+.button {
+    display: inline-block;
+    background: linear-gradient(90deg, #0066d4, #1aa3ff);
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.button:hover {
+    box-shadow: 0 0 25px #0066d4;
+    transform: scale(1.03);
+}
+
+/* Snow effect */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    font-size: 1em;
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+    animation-name: fall;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10px) translateX(0); opacity: 0.8; }
+    50% { transform: translateY(50vh) translateX(20px); }
+    100% { transform: translateY(100vh) translateX(-10px); opacity: 0.2; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="brand"><h1>Engine6.0 Archive</h1></div>
+</header>
+
+<div class="container">
+    <div class="panel" data-aos="fade-up" data-aos-duration="1200">
+        <h2>What the Archive Does</h2>
+        <p>This archive allows you to securely store, manage, and access your media files and data links. All uploads are linked with Gofile, ensuring reliability and fast access.</p>
+        <a href="https://duckehas.github.io/Enigne6.0-Archive/" class="button">View Archive</a>
+    </div>
+
+    <div class="panel" data-aos="fade-up" data-aos-duration="1400">
+        <h2>Security Features</h2>
+        <p>Every file link is verified before being added. The archive prevents unauthorized access, copying, and tampering. You can track file upload history and monitor the security status of each file. Password protection is supported for sensitive links.</p>
+    </div>
+
+    <div class="panel" data-aos="fade-up" data-aos-duration="1600">
+        <h2>Detailed Security Status</h2>
+        <p>Files are checked against potential exposure risks. The system displays real-time status updates including last accessed time, owner verification, and whether links are valid. This ensures you always know the integrity and safety of your data.</p>
+    </div>
+</div>
+
+<script>
+AOS.init({ once: true });
+
+// Snow effect generation
+function createSnowflake() {
+    const snowflake = document.createElement('div');
+    snowflake.classList.add('snowflake');
+    snowflake.style.left = Math.random() * window.innerWidth + 'px';
+    snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+    snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+    snowflake.textContent = '❄';
+    document.body.appendChild(snowflake);
+
+    setTimeout(() => {
+        snowflake.remove();
+    }, 10000);
+}
+
+setInterval(createSnowflake, 200);
+</script>
+
+</body>
+</html>

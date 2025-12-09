@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up</title>
+<link href="assets/css/imports.css" rel="stylesheet">
+<link href="assets/css/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/font.css">
+<style>
+body {
+    background: #050b14;
+    color: white;
+    user-select: none;
+    font-family: sans-serif;
+}
+.signup-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.signup-box {
+    width: 420px;
+    padding: 35px;
+    border-radius: 20px;
+    background: rgba(8, 16, 30, 0.95);
+    box-shadow: 0 0 40px #0066d4;
+}
+.signup-box h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    background: linear-gradient(to right, #0066d4, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.signup-box input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #0066d4;
+    background: #020814;
+    color: white;
+    outline: none;
+}
+.signup-box input:focus { box-shadow:0 0 10px #0066d4; }
+.signup-box button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #0066d4, #1aa3ff);
+    color:white;
+    transition: 0.3s;
+}
+.signup-box button:hover { box-shadow:0 0 25px #0066d4; transform:scale(1.03);}
+.signup-footer { margin-top:15px; text-align:center; font-size:14px; color:#aaa; }
+.signup-footer a { color:#4fc3ff; text-decoration:none; }
+.error { color:#ff4f4f; font-size:13px; margin-bottom:10px; display:none; }
+</style>
+</head>
+<body oncontextmenu="return false">
+
+<div class="signup-container">
+  <div class="signup-box">
+    <h1>Create Account</h1>
+    <div class="error" id="errorBox"></div>
+    <form id="signupForm" autocomplete="off">
+      <input type="text" id="username" placeholder="Username" maxlength="20" required>
+      <input type="password" id="password" placeholder="Password (min 8 chars)" minlength="8" required>
+      <input type="password" id="confirm" placeholder="Confirm Password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+    <div class="signup-footer">
+      Already have an account? <a href="login.html">Login</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* DEVTOOLS BLOCK */
+document.addEventListener("keydown", e => {
+  if(e.keyCode===123||(e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key.toUpperCase()))||(e.ctrlKey && ["U","S"].includes(e.key.toUpperCase()))){ e.preventDefault(); return false;}
+});
+
+/* SIGNUP LOGIC */
+document.getElementById("signupForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const username = document.getElementById("username").value.trim().toLowerCase();
+  const password = document.getElementById("password").value;
+  const confirm = document.getElementById("confirm").value;
+  const errorBox = document.getElementById("errorBox");
+
+  errorBox.style.display="none";
+  if(username.length<3){ errorBox.innerText="Username must be at least 3 characters."; errorBox.style.display="block"; return;}
+  if(password!==confirm){ errorBox.innerText="Passwords do not match."; errorBox.style.display="block"; return;}
+  if(!/[A-Z]/.test(password)||!/[0-9]/.test(password)){ errorBox.innerText="Password must contain a number and uppercase letter."; errorBox.style.display="block"; return;}
+
+  let users = JSON.parse(localStorage.getItem("users")||"[]");
+  if(users.find(u=>u.username===username)){ errorBox.innerText="Username already exists."; errorBox.style.display="block"; return;}
+
+  users.push({username,password,status:"active",timeoutUntil:null});
+  localStorage.setItem("users", JSON.stringify(users));
+  alert("Account created!");
+  window.location.href="login.html";
+});
+</script>
+</body>
+</html>
